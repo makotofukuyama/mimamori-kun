@@ -10,28 +10,22 @@ import datetime         #debug
 #####  Set constant values for MQTT broker   #############
 
 # BrokerAddress = "127.0.0.1"              # Local MQTT 
-BrokerAddress = "test.mosquitto.org"    # Cloud MQTT
-# MqttTopic = "piper-jp"
-MqttTopic = "pipertest_makotofukuyama"
+BrokerAddress = "xxxxx.mosquitto.org"    # Cloud MQTT
+# MqttTopic = "xxxxxxxxxxxxxxx"
+MqttTopic = "xxxxxxxxxxxxxxxxxxxxxxxxx"
 ###########################################################
 #####  Set constant values for Radis  #####################
 
 RedisKey = "RPIvalue"
 
-##########################
-### For Local Redis 
-# RedisHost = "127.0.0.1"                  
-# RedisPort = "6379"
-# RedisPwd = ""
-##########################
 
 ##########################
 ### For using RadisLabs
 ### You need to change RedisHost,RedisPort and RedisPwd below
 
-RedisHost = "redis-14835.c290.ap-northeast-1-2.ec2.cloud.redislabs.com"  
-RedisPort = "14835"
-RedisPwd = "QrLpQ8da2cEk0jsxbOHsYY1IUecSvWJk"
+RedisHost = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.redislabs.com"  
+RedisPort = "xxxxxxxxxxxx"
+RedisPwd = "xxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ##########################
 
 ###########################################################
@@ -51,20 +45,12 @@ def check_db():
     print("Key:" + RedisKey + "Value:" + msg)
     return ret
 
-# def set_db(msg):                            ### set data to Redis 
-#     r = redis.Redis(host=RedisHost, port=RedisPort, password=RedisPwd, db=0)
-#     now_t = (datetime.datetime.now()).strftime("%m/%d %H:%M:%S")  #debug 
-#     # r.set(RedisKey ,msg)                   
-#     r.set(now_t ,msg)                   
-#     print("Updated Radis db=0", )
-
 def set_db(msg):                            ### set data to Redis 
     r = redis.Redis(host=RedisHost, port=RedisPort, password=RedisPwd, db=0)
     now_t = (datetime.datetime.now()).strftime("%m/%d %H:%M")  #debug  :%Sを削除
     # r.set(RedisKey ,msg)                   
     r.set(now_t ,msg)                   
     print("Updated Radis db=0", )
-
 
 def on_message(client, userdata, message):  ### callback when get message from MQTT broker
     msg = str(message.payload.decode("utf-8"))

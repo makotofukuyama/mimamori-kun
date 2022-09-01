@@ -18,9 +18,9 @@ RedisKey = "RPIvalue"
 ### For using RadisLabs
 ### You need to change RedisHost,RedisPort and RedisPwd below
 
-RedisHost = "redis-14835.c290.ap-northeast-1-2.ec2.cloud.redislabs.com"  
-RedisPort = "14835"
-RedisPwd = "QrLpQ8da2cEk0jsxbOHsYY1IUecSvWJk"
+RedisHost = "xxxxxxx.redislabs.com"  
+RedisPort = "xxxxx"
+RedisPwd = "xxxxxxxxxxxxxxxxxxxx"
 ##########################
 
 ###########################################################
@@ -49,7 +49,7 @@ def get_db():                            ### get data from Redis
 
 def linenotify():
     url = "https://notify-api.line.me/api/notify" 
-    token = "75guZzuFtGo4JNwD785bISaLFc8Re7aetqHlx7GrOw0"
+    token = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     headers = {"Authorization" : "Bearer "+ token} 
     message =  "現在の温度は" + str(inputValue.decode("utf-8")) + "℃です。ヒーターの電源を" + dengenjyoutai + "に変更しました"
     payload = {"message" :  message} 
@@ -58,10 +58,10 @@ def linenotify():
 
 def switchbotpoweron():
 
-    url = "https://api.switch-bot.com/v1.0/devices/6055F93BF3D2/commands"
+    url = "https://api.switch-bot.com/v1.0/devices/xxxxxxxxxxxx/commands"
 
     headers = CaseInsensitiveDict()
-    headers["Authorization"] = "1ad2a30693c71302deb9158f3531725ca01e42fe99be0deb60a389cd84b1d65954c6a076d1909ea27ea29f759225472c"
+    headers["Authorization"] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     headers["Content-Type"] = "application/json; charset=utf8"
 
     data = '{  "command": "turnOn",  "parameter": "default",  "commandType": "command"}'
@@ -74,10 +74,10 @@ def switchbotpoweron():
 
 def switchbotpoweroff():
 
-    url = "https://api.switch-bot.com/v1.0/devices/6055F93BF3D2/commands"
+    url = "https://api.switch-bot.com/v1.0/devices/xxxxxxxxxxxxx/commands"
 
     headers = CaseInsensitiveDict()
-    headers["Authorization"] = "1ad2a30693c71302deb9158f3531725ca01e42fe99be0deb60a389cd84b1d65954c6a076d1909ea27ea29f759225472c"
+    headers["Authorization"] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     headers["Content-Type"] = "application/json; charset=utf8"
 
     data = '{  "command": "turnOff",  "parameter": "default",  "commandType": "command"}'

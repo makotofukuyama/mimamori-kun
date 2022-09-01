@@ -9,8 +9,8 @@ import paho.mqtt.client as mqtt # distance-pub.pyから追加
 #### distance-pub.pyからマージ （ここから）####
 
 ###### Edit variables to your environment #######
-broker_address = "test.mosquitto.org"     #MQTT broker_address :192.168.0.31
-Topic = "pipertest_makotofukuyama"
+broker_address = "xxxxxx.mosquitto.org"     #MQTT broker_address :192.168.xxx.xxx
+Topic = "xxxxxxxxxxxxxxxxxxxxxx"
 
 Trigger = 16
 Echo = 18
