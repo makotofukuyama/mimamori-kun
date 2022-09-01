@@ -135,7 +135,7 @@ while True:
         jyoutaihyouji()
         ondohyouji()       
         print("No actionです")                                         # for debug
-        sleep(5)
+    sleep(5)
 
 ###########################################################
 
