@@ -51,7 +51,7 @@ def linenotify():
     url = "https://notify-api.line.me/api/notify" 
     token = "75guZzuFtGo4JNwD785bISaLFc8Re7aetqHlx7GrOw0"
     headers = {"Authorization" : "Bearer "+ token} 
-    message =  "現在の温度は" + str(inputValue.decode("utf-8")) + "℃です。ヒーターの電源を" + dengenjyoutai + "　に変更しました"
+    message =  "現在の温度は" + str(inputValue.decode("utf-8")) + "℃です。ヒーターの電源を" + dengenjyoutai + "に変更しました"
     payload = {"message" :  message} 
     r = requests.post(url, headers = headers, params=payload)
 
@@ -93,7 +93,7 @@ def switchbotpoweroff():
 ###########################################################
 #####  初期設定　　　　　　      ###########################
 kijun = float(30.00)        # 温度基準値℃
-dengenjyoutai = "off"       # 電源状態。"on"または"off"
+dengenjyoutai = "OFF"       # 電源状態。"ON"または"OFF"
 ###########################################################
 
 ###########################################################
@@ -105,32 +105,32 @@ while True:
     if inputValue is None:
         print ("No data on Redis")
         # print (now_t, "No data on Redis")   # for debug
-    elif float(inputValue) < kijun and dengenjyoutai == "off" :             #　turnon処理。
+    elif float(inputValue) < kijun and dengenjyoutai == "OFF" :             #　turnon処理。
         print (dengenjyoutai)                                                # for debug
         print("turnon処理をします")                                         # for debug
         print(now_t, end="   ")
         print(inputValue.decode("utf-8"))
         switchbotpoweron()
-        dengenjyoutai = "on"                                                # 電源状態をオンに変更
+        dengenjyoutai = "ON"                                                # 電源状態をオンに変更
         linenotify()
-        print ("電源の状態を ", dengenjyoutai, "　に変更しました")                                                # for debug        
+        print ("電源の状態を ", dengenjyoutai, "に変更しました")                                                # for debug        
         sleep(55)                           # 一度通知したら55秒休む(合計１分)
-    elif float(inputValue) >= kijun and dengenjyoutai == "on" :             #　turnoff処理。
+    elif float(inputValue) >= kijun and dengenjyoutai == "ON" :             #　turnoff処理。
         print (dengenjyoutai)                                                # for debug
         print("turnoff処理をします")                                         # for debug
         print(now_t, end="   ")
         print(inputValue.decode("utf-8"))
         switchbotpoweroff()
-        dengenjyoutai = "off"                                                # 電源状態をオフに変更
+        dengenjyoutai = "OFF"                                                # 電源状態をオフに変更
         linenotify()
-        print ("電源の状態を ", dengenjyoutai, "　に変更しました")                                                # for debug        
+        print ("電源の状態を ", dengenjyoutai, "に変更しました")                                                # for debug        
         sleep(55)                           # 一度通知したら55秒休む(合計１分)
     else:                                       # 状態に変化がない場足の処理（No action）
-        print("No actionです")                                         # for debug
-        print (dengenjyoutai)                                                # for debug        
-        print(now_t, end="   ")
         print(inputValue.decode("utf-8"))
-        # linenotify()                      # 基準温度以上の場合はLine通知しない
+        print ("現在の電源は"+dengenjyoutai+"の状態です")               # for debug        
+        print("No actionです")                                         # for debug
+        print(now_t, end="   ")
+        # linenotify()                      # 電源状態の変更がない場合はLine通知しない
         # switchbotpoweroff()               # for debug
     sleep(5)
 
