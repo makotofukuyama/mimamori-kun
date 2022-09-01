@@ -88,6 +88,14 @@ def switchbotpoweroff():
     print(resp.status_code)
 
 
+def ondohyouji():
+    print(now_t, end="   ")
+    print(inputValue.decode("utf-8"))
+
+def jyoutaihyouji():
+    print ("現在の電源は"+dengenjyoutai+"の状態です")
+
+
 
 
 ###########################################################
@@ -106,33 +114,28 @@ while True:
         print ("No data on Redis")
         # print (now_t, "No data on Redis")   # for debug
     elif float(inputValue) < kijun and dengenjyoutai == "OFF" :             #　turnon処理。
-        print (dengenjyoutai)                                                # for debug
-        print("turnon処理をします")                                         # for debug
-        print(now_t, end="   ")
-        print(inputValue.decode("utf-8"))
+        jyoutaihyouji()
+        ondohyouji()
+        print("turnon処理をします")                                           # for debug
         switchbotpoweron()
         dengenjyoutai = "ON"                                                # 電源状態をオンに変更
         linenotify()
-        print ("電源の状態を ", dengenjyoutai, "に変更しました")                                                # for debug        
-        sleep(55)                           # 一度通知したら55秒休む(合計１分)
+        print ("電源の状態を ", dengenjyoutai, "に変更しました")              # for debug        
+        sleep(55)                                                           # 一度通知したら55秒休む(合計１分)
     elif float(inputValue) >= kijun and dengenjyoutai == "ON" :             #　turnoff処理。
-        print (dengenjyoutai)                                                # for debug
+        jyoutaihyouji()
+        ondohyouji()                                              # for debug
         print("turnoff処理をします")                                         # for debug
-        print(now_t, end="   ")
-        print(inputValue.decode("utf-8"))
         switchbotpoweroff()
         dengenjyoutai = "OFF"                                                # 電源状態をオフに変更
         linenotify()
-        print ("電源の状態を ", dengenjyoutai, "に変更しました")                                                # for debug        
+        print ("電源の状態を ", dengenjyoutai, "に変更しました")                 # for debug        
         sleep(55)                           # 一度通知したら55秒休む(合計１分)
     else:                                       # 状態に変化がない場足の処理（No action）
-        print(inputValue.decode("utf-8"))
-        print ("現在の電源は"+dengenjyoutai+"の状態です")               # for debug        
+        jyoutaihyouji()
+        ondohyouji()       
         print("No actionです")                                         # for debug
-        print(now_t, end="   ")
-        # linenotify()                      # 電源状態の変更がない場合はLine通知しない
-        # switchbotpoweroff()               # for debug
-    sleep(5)
+        sleep(5)
 
 ###########################################################
 
